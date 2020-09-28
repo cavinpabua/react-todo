@@ -11,6 +11,7 @@ class ItemList extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleChange(event) {
         this.setState({ [event.target.id]: event.target.value });
     }
@@ -43,7 +44,9 @@ class ItemList extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
-    addList: text => addList(text).then(dispatch(refreshList))
+    addList: text => addList(text).then((resp) =>{
+        dispatch(refreshList)
+    })
 });
 
 const FormList =  connect(

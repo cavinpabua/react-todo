@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import { refreshList,deleteTodo,MarkCompleteItem } from "./Item.actions";
 
 const ItemList = ({ items, refreshList,deleteTodo,MarkCompleteItem }) => (
-  <div onLoad={refreshList}>
-    <button onClick={refreshList}>Refresh</button>
+  <div >
     <ul>
       {items.map(item => (
         <li key={item.id}>{item.name}
-            <button key={item.id} onClick={() => {deleteTodo(item.id)}}>Remove</button>
-            <button key={item.id} onClick={() => {MarkCompleteItem(item.id)}}>Mark Complete</button>
+            <button  onClick={() => {deleteTodo(item.id)}}>Remove</button>
+            <button  onClick={() => {MarkCompleteItem(item.id)}}>Mark Complete</button>
         </li>
       ))}
     </ul>
@@ -23,9 +22,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  refreshList: () => dispatch(refreshList),
-    deleteTodo: todo => deleteTodo(todo).then(dispatch(refreshList)),
-    MarkCompleteItem: todo => MarkCompleteItem(todo).then(dispatch(refreshList)),
+    refreshList: () => dispatch(refreshList),
+    deleteTodo: todo => deleteTodo(todo).then((resp) =>{
+        dispatch(refreshList)
+    }),
+    MarkCompleteItem: todo => MarkCompleteItem(todo).then((resp) =>{
+        dispatch(refreshList)
+    })
 });
 
 export default connect(
