@@ -15,4 +15,8 @@ export class ItemServiceImpl implements ItemService {
   async GetItems(): Promise<Item[]> {
     return this.itemRepo.GetItems();
   }
+
+  AddItem(item:any) {
+    return this.itemRepo.AddItem(item);
+  }
 }
