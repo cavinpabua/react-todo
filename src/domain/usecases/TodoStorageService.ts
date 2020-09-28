@@ -1,8 +1,8 @@
-import { Todo } from "../entities/todo";
+import { TodoStorage } from "../entities/todoStorage";
 import { TodoRepository } from "../repositories/TodoRepository";
 
 export interface TodoService {
-  GetTodos(): Promise<Todo[]>;
+  GetTodos(): Promise<TodoStorage[]>;
 }
 
 export class TodoServiceImpl implements TodoService {
@@ -12,7 +12,7 @@ export class TodoServiceImpl implements TodoService {
     this.itemRepo = ir;
   }
 
-  async GetTodos(): Promise<Todo[]> {
+  async GetTodos(): Promise<TodoStorage[]> {
     return this.itemRepo.GetTodos();
   }
 

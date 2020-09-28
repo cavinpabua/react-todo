@@ -1,4 +1,4 @@
-export class Todo {
+export class TodoStorage {
   name: string;
   id: number;
   isComplete: boolean;

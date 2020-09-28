@@ -1,5 +1,5 @@
-import { Todo } from "../../domain/entities/todoStorage";
-import { TodoRepository } from "../../domain/repositories/TodoStorageRepository";
+import { TodoStorage } from "../../domain/entities/todoStorage";
+import { TodoStorageRepository } from "../../domain/repositories/TodoStorageRepository";
 import { STORAGE_NAME } from  "../../app/pages/localstorage/Storage.global"
 class TodoDTO {
   name: string = "";
@@ -15,7 +15,7 @@ class TodoDTO {
 
 
 
-export class TodoRepositoryImpl implements TodoRepository {
+export class TodoRepositoryImpl implements TodoStorageRepository {
   localStorageGet(name: string) {
     let item= localStorage.getItem(name);
     if (item !== null){
@@ -35,7 +35,7 @@ export class TodoRepositoryImpl implements TodoRepository {
     let itemArray = JSON.parse(<string>this.localStorageGet(STORAGE_NAME))
     console.log(itemArray)
     if (!this.isEmpty(itemArray)) {
-      return itemArray.obj.map((item: TodoDTO) => new Todo(item.id,item.name,item.isComplete));
+      return itemArray.obj.map((item: TodoDTO) => new TodoStorage(item.id,item.name,item.isComplete));
     }
 
   }
@@ -53,7 +53,7 @@ export class TodoRepositoryImpl implements TodoRepository {
       this.localStorageSet(STORAGE_NAME,JSON.stringify(itemArray))
     }
 
-    return itemArray['obj'].map((item: TodoDTO) => new Todo(item.id,item.name,item.isComplete));
+    return itemArray['obj'].map((item: TodoDTO) => new TodoStorage(item.id,item.name,item.isComplete));
   }
   DeleteTodo(id: number) {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

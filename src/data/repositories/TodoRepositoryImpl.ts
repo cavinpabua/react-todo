@@ -1,5 +1,5 @@
-import { Todo } from "../../domain/entities/todo";
-import { TodoRepository } from "../../domain/repositories/TodoRepository";
+import { TodoStorage } from "../../domain/entities/todoStorage";
+import { TodoStorageRepository } from "../../domain/repositories/TodoStorageRepository";
 
 class TodoDTO {
   name: string = "";
@@ -7,14 +7,14 @@ class TodoDTO {
   isComplete = false;
 }
 let itemArray: any[] =[];
-export class TodoRepositoryImpl implements TodoRepository {
+export class TodoRepositoryImpl implements TodoStorageRepository {
 
-  GetTodos(): Todo[]{
-    return itemArray.map((item: TodoDTO) => new Todo(item.id,item.name,item.isComplete));
+  GetTodos(): TodoStorage[]{
+    return itemArray.map((item: TodoDTO) => new TodoStorage(item.id,item.name,item.isComplete));
   }
   AddTodo(item:any) {
     itemArray.push(item)
-    return itemArray.map((item: TodoDTO) => new Todo(item.id,item.name,item.isComplete));
+    return itemArray.map((item: TodoDTO) => new TodoStorage(item.id,item.name,item.isComplete));
   }
   DeleteTodo(id: number) {
     itemArray = itemArray.filter(function(el) { return el.id !== id; });
@@ -25,5 +25,11 @@ export class TodoRepositoryImpl implements TodoRepository {
       itemArray[toUpdate].name = itemArray[toUpdate].name+" ✓"
       itemArray[toUpdate].isComplete = true;
     }
+  }
+
+  localStorageGet(name: string): any {
+  }
+
+  localStorageSet(name: string, value: any): any {
   }
 }

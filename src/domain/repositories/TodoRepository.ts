@@ -1,7 +1,7 @@
-import { Todo } from "../entities/todo";
+import { TodoStorage } from "../entities/todoStorage";
 
 export interface TodoRepository {
-  GetTodos(): Todo[];
+  GetTodos(): TodoStorage[];
   AddTodo(Todo:any):any;
   DeleteTodo(id:number):any;
   MarkCompleteTodo(id:number):any;
