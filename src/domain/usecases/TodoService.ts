@@ -16,12 +16,14 @@ export class TodoServiceImpl implements TodoService {
     return this.itemRepo.GetTodos();
   }
 
-  AddTodo(item:any) {
+  AddTodo(item:Todo) {
+    if (item.name.length > 0)
     return this.itemRepo.AddTodo(item);
   }
 
-  DeleteTodo(id:number) {
-    return this.itemRepo.DeleteTodo(id);
+  DeleteTodo(item:Todo) {
+    if (!item.isComplete)
+    return this.itemRepo.DeleteTodo(item.id);
   }
   MarkCompleteTodo(id:number) {
     return this.itemRepo.MarkCompleteTodo(id);

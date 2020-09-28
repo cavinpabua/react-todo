@@ -23,29 +23,27 @@ export const addList = async (payload) => {
   const todoRepo = new TodoRepositoryImpl();
   const itemService = new TodoServiceImpl(todoRepo);
   const item = payload.text;
-  if (item !== "") {
-    const items = await itemService.GetTodos();
-    let new_id = 1;
-    try {
-      new_id =
-        Math.max.apply(
-          Math,
-          items.map(function (o) {
-            return o.id;
-          })
-        ) + 1;
-      if (new_id === -Infinity) {
-        new_id = 1;
-      }
-    } catch (e) {}
+  const items = await itemService.GetTodos();
+  let new_id = 1;
+  try {
+    new_id =
+      Math.max.apply(
+        Math,
+        items.map(function (o) {
+          return o.id;
+        })
+      ) + 1;
+    if (new_id === -Infinity) {
+      new_id = 1;
+    }
+  } catch (e) {}
 
-    let params = {
-      id: new_id,
-      name: item,
-    };
-    await itemService.AddTodo(params);
-    return { type: LIST_LOAD_SUCCESS, id: new_id, payload };
-  }
+  let params = {
+    id: new_id,
+    name: item,
+  };
+  await itemService.AddTodo(params);
+  return { type: LIST_LOAD_SUCCESS, id: new_id, payload };
 };
 
 export const deleteTodo = async (id) => {

@@ -7,7 +7,7 @@ const TodoList = ({ items, refreshList,deleteTodo,MarkCompleteItem }) => (
     <ul>
       {items.map(item => (
         <li key={item.id}>{item.name}
-            <button  onClick={() => {deleteTodo(item.id)}}>Remove</button>
+            <button  onClick={() => {deleteTodo(item)}}>Remove</button>
             <button  onClick={() => {MarkCompleteItem(item.id)}}>Mark Complete</button>
         </li>
       ))}
