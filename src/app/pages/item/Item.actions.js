@@ -3,16 +3,16 @@ import {
   LIST_LOAD_SUCCESS,
   LIST_LOAD_FAILURE,
 } from "./Item.types";
-import { ItemServiceImpl } from "../../../domain/usecases/ItemService";
-import { ItemRepositoryImpl } from "../../../data/repositories/ItemRepositoryImpl";
+import { TodoServiceImpl } from "../../../domain/usecases/TodoService";
+import { TodoRepositoryImpl } from "../../../data/repositories/TodoRepositoryImpl";
 
 export const refreshList = async (dispatch) => {
   dispatch({ type: LIST_LOAD_REQUEST });
 
   try {
-    const itemRepo = new ItemRepositoryImpl();
-    const itemService = new ItemServiceImpl(itemRepo);
-    const items = await itemService.GetItems();
+    const todoRepo = new TodoRepositoryImpl();
+    const itemService = new TodoServiceImpl(todoRepo);
+    const items = await itemService.GetTodos();
     dispatch({ type: LIST_LOAD_SUCCESS, payload: items });
   } catch (error) {
     dispatch({ type: LIST_LOAD_FAILURE, error });
@@ -20,11 +20,11 @@ export const refreshList = async (dispatch) => {
 };
 
 export const addList = async (payload) => {
-  const itemRepo = new ItemRepositoryImpl();
-  const itemService = new ItemServiceImpl(itemRepo);
+  const todoRepo = new TodoRepositoryImpl();
+  const itemService = new TodoServiceImpl(todoRepo);
   const item = payload.text;
   if (item !== "") {
-    const items = await itemService.GetItems();
+    const items = await itemService.GetTodos();
     let new_id = 1;
     try {
       new_id =
@@ -43,15 +43,15 @@ export const addList = async (payload) => {
       id: new_id,
       name: item,
     };
-    await itemService.AddItem(params);
+    await itemService.AddTodo(params);
     return { type: LIST_LOAD_SUCCESS, id: new_id, payload };
   }
 };
 
 export const deleteTodo = async (id) => {
   try {
-    const itemRepo = new ItemRepositoryImpl();
-    const todoService = new ItemServiceImpl(itemRepo);
+    const todoRepo = new TodoRepositoryImpl();
+    const todoService = new TodoServiceImpl(todoRepo);
     await todoService.DeleteTodo(id);
   } catch (error) {
     alert(error);
@@ -60,9 +60,9 @@ export const deleteTodo = async (id) => {
 
 export const MarkCompleteItem = async (id) => {
   try {
-    const itemRepo = new ItemRepositoryImpl();
-    const todoService = new ItemServiceImpl(itemRepo);
-    await todoService.MarkCompleteItem(id);
+    const todoRepo = new TodoRepositoryImpl();
+    const todoService = new TodoServiceImpl(todoRepo);
+    await todoService.MarkCompleteTodo(id);
   } catch (error) {
     alert(error);
   }
