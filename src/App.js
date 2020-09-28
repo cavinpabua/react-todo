@@ -4,6 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import ItemList from "./app/pages/item/ItemList";
+import ItemForm from "./app/pages/item/ItemForm";
 import items from "./app/pages/item/Item.reducers";
 
 // Setup Redux store with Thunks
@@ -13,6 +14,7 @@ const store = createStore(reducers, applyMiddleware(thunk));
 const App = () => (
   <Provider store={store}>
     <ItemList />
+    <ItemForm />
   </Provider>
 );
 

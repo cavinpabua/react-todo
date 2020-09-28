@@ -1,20 +1,22 @@
-import React from "react";
+import React  from "react";
 import { connect } from "react-redux";
-import { refreshList,addList } from "./Item.actions";
+import { refreshList,deleteTodo } from "./Item.actions";
 
-const ItemList = ({ items, refreshList,addList }) => (
-  <div>
+const ItemList = ({ items, refreshList,deleteTodo }) => (
+  <div onLoad={refreshList}>
     <button onClick={refreshList}>Refresh</button>
     <ul>
       {items.map(item => (
-        <li key={item.name}>{item.name}</li>
+        <li key={item.id}>{item.name} {item.id}
+            <button key={item.id} onClick={() => {deleteTodo(item.id)}}>Remove</button>
+        </li>
+
       ))}
     </ul>
-      <input type="text" id="new-item"></input>
-      <button onClick={addList}>Add Item</button>
   </div>
 
 );
+
 
 const mapStateToProps = state => ({
   items: state.items.items
@@ -22,11 +24,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   refreshList: () => dispatch(refreshList),
-    addList: () => {
-        let input_value = document.getElementById("new-item")
-        dispatch(addList(input_value.value));
-        input_value.value = "";
-    }
+    deleteTodo: todo => deleteTodo(todo).then(dispatch(refreshList)),
 });
 
 export default connect(

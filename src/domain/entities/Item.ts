@@ -1,7 +1,9 @@
 export class Item {
   name: string;
+  id: number;
 
-  constructor(name: string) {
+  constructor(id:number, name: string) {
     this.name = name;
+    this.id = id;
   }
 }

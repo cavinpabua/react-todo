@@ -19,4 +19,8 @@ export class ItemServiceImpl implements ItemService {
   AddItem(item:any) {
     return this.itemRepo.AddItem(item);
   }
+
+  DeleteTodo(id:number) {
+    return this.itemRepo.DeleteItem(id);
+  }
 }
