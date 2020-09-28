@@ -52,7 +52,7 @@ export class TodoRepositoryImpl implements TodoStorageRepository {
   DeleteTodo(id: number) {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     let itemArray = JSON.parse(<string>this.localStorageGet(STORAGE_NAME))
-    itemArray.obj= itemArray.obj.filter(function(el: { id: number; }) { return el.id !== id; });
+    itemArray.obj= itemArray.obj.filter(function(el: { isComplete: Boolean;id: number; }) { return el.id !== id || el.isComplete; });
     this.localStorageSet(STORAGE_NAME,JSON.stringify(itemArray))
   }
 
