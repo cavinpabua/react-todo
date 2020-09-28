@@ -2,8 +2,8 @@ import {
   LIST_LOAD_REQUEST,
   LIST_LOAD_SUCCESS,
   LIST_LOAD_FAILURE,
-} from "./Storage.types";
-import { TodoServiceImpl } from "../../../domain/usecases/TodoStorageService";
+} from "./Todo.types";
+import { TodoServiceImpl } from "../../../domain/usecases/TodoService";
 import { TodoRepositoryImpl } from "../../../data/repositories/TodoRepositoryStorageImpl";
 
 export const refreshList = async (dispatch) => {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { refreshList,addList } from "./Storage.actions";
+import { refreshList,addList } from "./Todo.actions";
 
-class StorageList extends Component {
+class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,6 +52,6 @@ const mapDispatchToProps = dispatch => ({
 const FormList =  connect(
     null,
     mapDispatchToProps
-)(StorageList);
+)(ItemList);
 
 export default FormList;

@@ -1,8 +1,8 @@
 import React  from "react";
 import { connect } from "react-redux";
-import { refreshList,deleteTodo,MarkCompleteItem } from "./Item.actions";
+import { refreshList,deleteTodo,MarkCompleteItem } from "./Todo.actions";
 
-const ItemList = ({ items, refreshList,deleteTodo,MarkCompleteItem }) => (
+const TodoList = ({ items, refreshList,deleteTodo,MarkCompleteItem }) => (
   <div >
     <ul>
       {items.map(item => (
@@ -34,4 +34,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ItemList);
+)(TodoList);
