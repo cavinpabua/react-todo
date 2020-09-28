@@ -19,36 +19,51 @@ export const refreshList = async (dispatch) => {
   }
 };
 
-export const addList = async payload => {
+export const addList = async (payload) => {
   const itemRepo = new ItemRepositoryImpl();
   const itemService = new ItemServiceImpl(itemRepo);
-  const item = payload.text
+  const item = payload.text;
   if (item !== "") {
     const items = await itemService.GetItems();
     let new_id = 1;
-    try{
-      new_id = Math.max.apply(Math, items.map(function(o) { return o.id; })) + 1
+    try {
+      new_id =
+        Math.max.apply(
+          Math,
+          items.map(function (o) {
+            return o.id;
+          })
+        ) + 1;
       if (new_id === -Infinity) {
-        new_id = 1
+        new_id = 1;
       }
-    }catch (e){}
+    } catch (e) {}
 
     let params = {
       id: new_id,
       name: item,
     };
     await itemService.AddItem(params);
-    return { type: LIST_LOAD_SUCCESS, id: new_id, payload }
+    return { type: LIST_LOAD_SUCCESS, id: new_id, payload };
   }
 };
 
-
-export const deleteTodo = async id => {
+export const deleteTodo = async (id) => {
   try {
-    const itemRepo = new ItemRepositoryImpl()
-    const todoService = new ItemServiceImpl(itemRepo)
-    await todoService.DeleteTodo(id)
+    const itemRepo = new ItemRepositoryImpl();
+    const todoService = new ItemServiceImpl(itemRepo);
+    await todoService.DeleteTodo(id);
   } catch (error) {
-    alert(error)
+    alert(error);
   }
-}
+};
+
+export const MarkCompleteItem = async (id) => {
+  try {
+    const itemRepo = new ItemRepositoryImpl();
+    const todoService = new ItemServiceImpl(itemRepo);
+    await todoService.MarkCompleteItem(id);
+  } catch (error) {
+    alert(error);
+  }
+};
